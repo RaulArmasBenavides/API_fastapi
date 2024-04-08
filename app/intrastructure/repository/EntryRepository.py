@@ -22,8 +22,6 @@ class Entry(Model):
 
 
 class  EntryRepository(  IEntryRepository):
-  
-
     def add_entry(self, entry: EntryModel) -> EntryModel:
         with db.atomic():
             peewee_model = Entry.create(content=entry.content)
