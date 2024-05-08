@@ -1,4 +1,5 @@
 # Importa FastAPI
+import uvicorn
 from typing import List
 
 from fastapi import FastAPI
@@ -57,7 +58,9 @@ class AppCreator:
         # self.app.include_router(v2_routers, prefix=configs.API_V2_STR)
 
 
-app_creator = AppCreator()
-app = app_creator.app
-db = app_creator.db
-container = app_creator.container
+if __name__ == "__main__":
+    uvicorn.run(app="main:app", reload=True)
+    app_creator = AppCreator()
+    app = app_creator.app
+    db = app_creator.db
+    container = app_creator.container

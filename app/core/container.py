@@ -1,9 +1,9 @@
 from dependency_injector import containers, providers
 
-from app.core.config import configs
-from app.intrastructure.repository import Database
-from app.intrastructure.repository import *
-from app.application.services import *
+from app.core.models.config import configs
+from app.intrastructure.repository.database import Database 
+# from app.intrastructure.repository import *
+# from app.application.services import *
 
 
 class Container(containers.DeclarativeContainer):
