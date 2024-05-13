@@ -1,17 +1,16 @@
-
-
 from fastapi import APIRouter
-
+from dependency_injector.wiring import Provide, inject
 from app.application.services.EntryService import EntryService
 from app.core.models.entry import EntryModel
 # from app.intrastructure.repository import EntryRepository
 
 
 router = APIRouter(
-    prefix="/auth",
-    tags=["auth"],
+    prefix="/entries",
+    tags=["entries"],
 )
-@router.get("/")
+@router.get("/test")
+@inject
 async def read_root():
     return {"message": "Bienvenido a mi API construida con FastAPI!"}
 # repository =  EntryRepository()

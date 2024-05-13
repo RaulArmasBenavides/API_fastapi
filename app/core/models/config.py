@@ -76,7 +76,7 @@ configs = Configs()
 
 if ENV == "prod":
     pass
-elif ENV == "stage":
+elif ENV == "dev":
     pass
 elif ENV == "test":
     setting = TestConfigs()

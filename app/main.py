@@ -8,21 +8,11 @@ from app.api.v1.routes import routers as v1_routers
 from app.core.container import Container
 from app.util.class_object import singleton
 from app.core.models.config import configs
- 
+from app.api.items_router import router 
 # Crea una instancia de la aplicación FastAPI
 app = FastAPI()
 
  
-# @app.on_event("startup") 
-# # @app.router.lifecycle.on_startup()
-# def startup_event():
-#     """Evento de inicio para realizar tareas iniciales como la conexión a la base de datos."""
-#     create_and_connect()
-
-# @app.router.lifecycle.on_shutdown()
-# async def shutdown_event():
-#     db.close()
-
  
 @singleton
 class AppCreator:
@@ -36,7 +26,7 @@ class AppCreator:
 
         # set db and container
         self.container = Container()
-        self.db = self.container.db()
+        #self.db = self.container.db()
         # self.db.create_database()
 
         # set cors
@@ -54,13 +44,17 @@ class AppCreator:
         def root():
             return "service is working"
 
+        #self.app.include_router(router)
         self.app.include_router(v1_routers, prefix=configs.API_V1_STR)
-        # self.app.include_router(v2_routers, prefix=configs.API_V2_STR)
 
-
-if __name__ == "__main__":
-    uvicorn.run(app="main:app", reload=True)
-    app_creator = AppCreator()
-    app = app_creator.app
-    db = app_creator.db
-    container = app_creator.container
+app_creator = AppCreator()
+app = app_creator.app
+# db = app_creator.db
+container = app_creator.container
+# if __name__ == "__main__":
+#     #uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+#     uvicorn.run(app="main:app", reload=True)
+#     app_creator = AppCreator()
+#     app = app_creator.app
+#     db = app_creator.db
+#     container = app_creator.container
