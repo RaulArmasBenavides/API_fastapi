@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from dependency_injector.wiring import Provide, inject
 from app.application.services.EntryService import EntryService
 from app.core.models.entry import EntryModel
+from typing import List
 
 router = APIRouter(
     prefix="/entries",
