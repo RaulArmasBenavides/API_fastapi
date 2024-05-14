@@ -3,9 +3,9 @@ from fastapi import APIRouter, Depends
 
 from app.core.container import Container
 from app.core.dependencies import get_current_active_user
-from app.schema.auth_schema import SignIn, SignInResponse, SignUp
-from app.schema.user_schema import User
-from app.services.auth_service import AuthService
+from app.infrastructure.schema.auth_schema import SignIn, SignInResponse, SignUp
+from app.infrastructure.schema.user_schema import User
+from app.infrastructure.services.auth_service import AuthService
 
 router = APIRouter(
     prefix="/auth",

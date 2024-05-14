@@ -2,8 +2,6 @@ from fastapi import APIRouter
 from dependency_injector.wiring import Provide, inject
 from app.application.services.EntryService import EntryService
 from app.core.models.entry import EntryModel
-# from app.intrastructure.repository import EntryRepository
-
 
 router = APIRouter(
     prefix="/entries",
@@ -20,9 +18,9 @@ async def read_root():
 # async def create_entry(entry_data: EntryModel):
 #     return service.create_entry(entry_data)
 
-# @router.get("/entries/", response_model=List[EntryModel])
-# async def get_entries():
-#     return service.get_entries()
+@router.get("/entries/", response_model=List[EntryModel])
+async def get_entries():
+    return service.get_entries()
 
 # @router.delete("/entries/{entry_id}")
 # async def delete_entry(entry_id: int):
