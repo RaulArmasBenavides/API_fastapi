@@ -1,10 +1,10 @@
 from peewee import SqliteDatabase,Model,TextField,DateTimeField 
 import datetime
-db = SqliteDatabase('diary.db')
+from .db import db_proxy
 
 class EntrySchema(Model):
     content = TextField()
     timestamp = DateTimeField(default = datetime.datetime.now)
 
     class Meta: 
-        database = db
+        database = db_proxy

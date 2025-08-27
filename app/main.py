@@ -1,14 +1,14 @@
 # Importa FastAPI
 import uvicorn
-from typing import List
-
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from app.api.v1.routes import routers as v1_routers
 from app.core.container import Container
+from app.infrastructure.schema.entry_schema import EntrySchema
 from app.util.class_object import singleton
 from app.core.models.config import configs
 from app.api.items_router import router 
+from app.infrastructure.schema.db import db_proxy
 # Crea una instancia de la aplicación FastAPI
 app = FastAPI()
 
@@ -46,6 +46,19 @@ class AppCreator:
 
         #self.app.include_router(router)
         self.app.include_router(v1_routers, prefix=configs.API_V1_STR)
+                # --- Lifecycle DB (Peewee) ---
+        @self.app.on_event("startup")
+        def _startup() -> None:
+            db = self.container.db()
+            db.connect(reuse_if_open=True)
+            db_proxy.initialize(db)              # <- clave para usar DatabaseProxy
+            db.create_tables([EntrySchema])      # agrega aquí más modelos si corresponde
+
+        @self.app.on_event("shutdown")
+        def _shutdown() -> None:
+            db = self.container.db()
+            if not db.is_closed():
+                db.close()
 
 app_creator = AppCreator()
 app = app_creator.app
