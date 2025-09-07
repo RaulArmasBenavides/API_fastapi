@@ -28,7 +28,7 @@ class Configs(BaseSettings):
     }
 
     PROJECT_ROOT: str = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    SQLITE_PATH: str = os.getenv("SQLITE_PATH", os.path.join(PROJECT_ROOT, "data", "diary.db"))
+    # SQLITE_PATH: str = os.getenv("SQLITE_PATH", os.path.join(PROJECT_ROOT, "data", "diary.db"))
     # date
     DATETIME_FORMAT: str = "%Y-%m-%dT%H:%M:%S"
     DATE_FORMAT: str = "%Y-%m-%d"

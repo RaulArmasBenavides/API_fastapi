@@ -3,6 +3,7 @@ import uvicorn
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from app.api.v1.routes import routers as v1_routers
+# from app.api.v2.routes import routers as v2_routers
 from app.core.container import Container
 from app.infrastructure.schema.entry_schema import EntrySchema
 from app.util.class_object import singleton
@@ -21,14 +22,18 @@ class AppCreator:
         self.app = FastAPI(
             title=configs.PROJECT_NAME,
             openapi_url=f"{configs.API}/openapi.json",
+            docs_url=f"{configs.API}/docs",      # Swagger UI
+            redoc_url=f"{configs.API}/redoc",    # ReDoc (opcional)
+            swagger_ui_parameters={
+                "displayRequestDuration": True,
+                "defaultModelsExpandDepth": -1,  # oculta el panel de modelos si molesta
+            },
             version="0.0.1",
         )
 
         # set db and container
         self.container = Container()
-        #self.db = self.container.db()
-        # self.db.create_database()
-
+        
         # set cors
         if configs.BACKEND_CORS_ORIGINS:
             self.app.add_middleware(
@@ -46,6 +51,7 @@ class AppCreator:
 
         #self.app.include_router(router)
         self.app.include_router(v1_routers, prefix=configs.API_V1_STR)
+        # self.app.include_router(v2_routers, prefix=configs.API_V2_STR)
                 # --- Lifecycle DB (Peewee) ---
         @self.app.on_event("startup")
         def _startup() -> None:
@@ -64,6 +70,8 @@ app_creator = AppCreator()
 app = app_creator.app
 # db = app_creator.db
 container = app_creator.container
+ 
+
 # if __name__ == "__main__":
 #     #uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
 #     uvicorn.run(app="main:app", reload=True)

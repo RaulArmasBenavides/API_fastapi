@@ -3,9 +3,6 @@ from app.application.services.base_service import BaseService
 from app.core.interfaces.IEntryRepository import IEntryRepository
 from app.core.interfaces.IEntryService import IEntryService
 from app.core.models.entry import EntryModel
- 
-# from infrastructure.repository.EntryRepository import EntryRepository
-
 
 class EntryService(BaseService, IEntryService):
     def __init__(self, entry_repository: IEntryRepository):

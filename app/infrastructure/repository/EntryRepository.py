@@ -25,8 +25,3 @@ class EntryRepository( IEntryRepository):
          entry.delete_instance()
 
 
-# def create_and_connect():
-#         """Conecta a la base de datos y crea las tablas si no existen."""
-#         db.connect()
-#         db.create_tables([EntrySchema], safe=True)
-    

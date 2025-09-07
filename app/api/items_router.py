@@ -2,10 +2,9 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List
 
-class Item(BaseModel):
-    id: int
-    name: str
-    description: str
+from app.core.models.item import Item
+
+
 
 # Simularemos una base de datos con una lista
 fake_db: List[Item] = []
