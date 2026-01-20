@@ -1,8 +1,6 @@
 from sqlmodel import Field
 
-from app.model.base_model import BaseModel
-
-
+from pydantic import BaseModel
 class Tag(BaseModel, table=True):
     user_token: str = Field()
 

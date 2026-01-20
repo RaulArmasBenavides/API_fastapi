@@ -1,5 +1,9 @@
+from typing import List, Optional
 from app.core.exceptions import NotFoundError
 from app.application.services.base_service import BaseService
+from app.core.interfaces import IItemRepository
+from app.core.interfaces.i_item_service import IItemService
+from app.core.models.item import Item
 
 class ItemService(BaseService, IItemService):
     """Orquestador de casos de uso para Items (sync)."""

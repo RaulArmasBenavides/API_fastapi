@@ -2,8 +2,9 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
-from app.schema.user_schema import User
+from app.core.models.user import User
 
+ 
 
 class SignIn(BaseModel):
     email__eq: str

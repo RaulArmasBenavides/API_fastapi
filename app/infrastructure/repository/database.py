@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 
 @as_declarative()
-class BaseModel:
+class ORMBase:
     id: Any
     __name__: str
 
@@ -29,7 +29,7 @@ class Database:
         )
 
     def create_database(self) -> None:
-        BaseModel.metadata.create_all(self._engine)
+        ORMBase.metadata.create_all(self._engine)
 
     @contextmanager
     def session(self) -> Callable[..., AbstractContextManager[Session]]:

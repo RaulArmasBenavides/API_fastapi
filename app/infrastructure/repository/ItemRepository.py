@@ -1,8 +1,9 @@
-from typing import Any, Dict
+from typing import Any, Dict, List, Optional
 from app.core.interfaces import IItemRepository
 from peewee import Database
 
 from app.core.models.item import Item
+from app.infrastructure.schema.item_schema import ItemSchema
 
 class ItemRepository(IItemRepository):
     """Repositorio de Items usando Peewee, con mapping genérico schema<->modelo."""
